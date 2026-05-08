@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>我的在线简历</title>
+<style>
+    body { font-family: Arial, sans-serif; max-width: 800px; margin: auto; padding: 20px; background: #f9f9f9; color: #333; }
+    h1, h2 { color: #2c3e50; }
+    h2 { border-bottom: 1px solid #ddd; padding-bottom: 5px; margin-top: 20px; }
+    ul { list-style-type: disc; margin-left: 20px; }
+    [contenteditable="true"] { outline: 2px dashed #2980b9; padding: 2px; }
+    #photo { width:150px; height:150px; object-fit:cover; border-radius:50%; border:1px solid #ccc; margin-bottom:10px; }
+    button { margin: 10px 5px 10px 0; padding: 8px 15px; font-size: 14px; cursor: pointer; }
+</style>
+</head>
+<body>
+
+<!-- 个人信息 -->
+<h1 id="name" contenteditable="true">张三</h1>
+<p id="title" contenteditable="true">产品经理 / 技术型人才</p>
+
+<!-- 照片 -->
+<div class="section">
+<h2>个人照片</h2>
+<img id="photo" src="" alt="点击上传照片">
+<br>
+<input type="file" id="photoInput" accept="image/*">
+</div>
+
+<!-- 简介 -->
+<div class="section">
+<h2 contenteditable="true">个人简介</h2>
+<p id="intro" contenteditable="true">拥有 5 年互联网产品经验，擅长用户调研、数据分析与项目管理。</p>
+</div>
+
+<!-- 工作经历 -->
+<div class="section">
+<h2 contenteditable="true">工作经历</h2>
+<h3 class="job-title" contenteditable="true">腾讯 – 产品经理</h3>
+<p class="date" contenteditable="true">(2020.01 – 2023.12)</p>
+<ul>
+    <li contenteditable="true">主导微信小程序优化项目，提升用户留存率 20%</li>
+    <li contenteditable="true">组织跨部门团队完成产品迭代，缩短开发周期 15%</li>
+</ul>
+</div>
+
+<!-- 教育背景 -->
+<div class="section">
+<h2 contenteditable="true">教育背景</h2>
+<h3 class="job-title" contenteditable="true">清华大学 – 信息管理与信息系统</h3>
+<p class="date" contenteditable="true">(2013.09 – 2017.06)</p>
+<ul>
+    <li contenteditable="true">主修课程：数据结构、数据库原理、项目管理</li>
+    <li contenteditable="true">荣誉：校级奖学金</li>
+</ul>
+</div>
+
+<!-- 技能 -->
+<div class="section">
+<h2 contenteditable="true">技能</h2>
+<ul>
+    <li contenteditable="true">Python, SQL, Excel</li>
+    <li contenteditable="true">Axure, Sketch, Figma</li>
+    <li contenteditable="true">Jira, Trello, Git</li>
+</ul>
+</div>
+
+<!-- 下载按钮 -->
+<div class="section">
+<button id="downloadPDF">下载 PDF</button>
+<button id="downloadIMG">下载图片</button>
+</div>
+
+<!-- JS: 保存和下载 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+/* ---------- localStorage 保存 ---------- */
+function saveContent(id) {
+    const el = document.getElementById(id);
+    if(el) el.addEventListener('input', () => {
+        localStorage.setItem(id, el.innerText);
+    });
+    if(localStorage.getItem(id)) el.innerText = localStorage.getItem(id);
+}
+['name','title','intro'].forEach(saveContent);
+
+// 保存工作经历列表项
+document.querySelectorAll('ul li[contenteditable="true"]').forEach((li,i)=>{
+    const key = 'li_' + i;
+    li.addEventListener('input',()=>localStorage.setItem(key,li.innerText));
+    if(localStorage.getItem(key)) li.innerText = localStorage.getItem(key);
+});
+
+// 保存照片
+const photoInput = document.getElementById('photoInput');
+const photo = document.getElementById('photo');
+if(localStorage.getItem('photo')) photo.src = localStorage.getItem('photo');
+photoInput.addEventListener('change',(e)=>{
+    const file = e.target.files[0];
+    if(!file) return;
+    const reader = new FileReader();
+    reader.onload = function(event){
+        photo.src = event.target.result;
+        localStorage.setItem('photo',event.target.result);
+    }
+    reader.readAsDataURL(file);
+});
+
+/* ---------- 下载功能 ---------- */
+const downloadPDF = document.getElementById('downloadPDF');
+const downloadIMG = document.getElementById('downloadIMG');
+
+downloadPDF.addEventListener('click', async ()=>{
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF('p','pt','a4');
+    const canvas = await html2canvas(document.body);
+    const imgData = canvas.toDataURL('image/png');
+    const imgProps = doc.getImageProperties(imgData);
+    const pdfWidth = doc.internal.pageSize.getWidth();
+    const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+    doc.addImage(imgData,'PNG',0,0,pdfWidth,pdfHeight);
+    doc.save('resume.pdf');
+});
+
+downloadIMG.addEventListener('click', async ()=>{
+    const canvas = await html2canvas(document.body);
+    const imgData = canvas.toDataURL('image/png');
+    const a = document.createElement('a');
+    a.href = imgData;
+    a.download = 'resume.png';
+    a.click();
+});
+</script>
+</body>
+</html>
