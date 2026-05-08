@@ -3,102 +3,135 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>张三的技术简历</title>
+<title>我的在线简历</title>
 <style>
-    body { font-family: "Helvetica Neue", Arial, sans-serif; line-height: 1.6; max-width: 800px; margin: auto; padding: 20px; background: #f9f9f9; color: #333; }
-    h1 { font-size: 32px; color: #2c3e50; margin-bottom: 5px; }
-    h2 { font-size: 22px; color: #34495e; border-bottom: 2px solid #ddd; padding-bottom: 5px; margin-top: 30px; }
-    h3 { font-size: 18px; margin-bottom: 5px; }
-    p, li { font-size: 16px; }
+    body { font-family: Arial, sans-serif; max-width: 800px; margin: auto; padding: 20px; background: #f9f9f9; color: #333; }
+    h1, h2 { color: #2c3e50; }
+    h2 { border-bottom: 1px solid #ddd; padding-bottom: 5px; margin-top: 20px; }
     ul { list-style-type: disc; margin-left: 20px; }
-    a { color: #2980b9; text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    .section { margin-bottom: 20px; }
-    .job-title { font-weight: bold; }
-    .date { color: #7f8c8d; font-size: 14px; }
-    .container { background: #fff; padding: 30px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    [contenteditable="true"] { outline: 2px dashed #2980b9; padding: 2px; }
+    #photo { width:150px; height:150px; object-fit:cover; border-radius:50%; border:1px solid #ccc; margin-bottom:10px; }
+    button { margin: 10px 5px 10px 0; padding: 8px 15px; font-size: 14px; cursor: pointer; }
 </style>
 </head>
 <body>
-<div class="container">
-<h1>张三</h1>
-<p>产品经理 / 技术型人才</p>
 
+<!-- 个人信息 -->
+<h1 id="name" contenteditable="true">张三</h1>
+<p id="title" contenteditable="true">产品经理 / 技术型人才</p>
+
+<!-- 照片 -->
 <div class="section">
-<h2>联系方式</h2>
-<p>邮箱: <a href="mailto:zhangsan@email.com">zhangsan@email.com</a><br>
-电话: +86 138 0000 0000<br>
-GitHub: <a href="https://github.com/zhangsan" target="_blank">github.com/zhangsan</a><br>
-LinkedIn: <a href="https://linkedin.com/in/zhangsan" target="_blank">linkedin.com/in/zhangsan</a></p>
+<h2>个人照片</h2>
+<img id="photo" src="" alt="点击上传照片">
+<br>
+<input type="file" id="photoInput" accept="image/*">
 </div>
 
+<!-- 简介 -->
 <div class="section">
-<h2>个人简介</h2>
-<p>拥有 5 年互联网产品经验，擅长用户调研、数据分析与项目管理，致力于将技术与商业价值结合，实现高效产品落地。</p>
+<h2 contenteditable="true">个人简介</h2>
+<p id="intro" contenteditable="true">拥有 5 年互联网产品经验，擅长用户调研、数据分析与项目管理。</p>
 </div>
 
+<!-- 工作经历 -->
 <div class="section">
-<h2>工作经历</h2>
-<h3 class="job-title">腾讯 – 产品经理</h3>
-<p class="date">2020.01 – 2023.12</p>
+<h2 contenteditable="true">工作经历</h2>
+<h3 class="job-title" contenteditable="true">腾讯 – 产品经理</h3>
+<p class="date" contenteditable="true">(2020.01 – 2023.12)</p>
 <ul>
-<li>主导微信小程序优化项目，提升用户留存率 20%</li>
-<li>组织跨部门团队完成产品迭代，缩短开发周期 15%</li>
-<li>通过数据分析优化功能布局，提高用户体验</li>
-</ul>
-
-<h3 class="job-title">百度 – 产品助理</h3>
-<p class="date">2017.06 – 2019.12</p>
-<ul>
-<li>协助产品经理完成需求分析与功能设计</li>
-<li>跟进开发与测试流程，确保项目按期上线</li>
+    <li contenteditable="true">主导微信小程序优化项目，提升用户留存率 20%</li>
+    <li contenteditable="true">组织跨部门团队完成产品迭代，缩短开发周期 15%</li>
 </ul>
 </div>
 
+<!-- 教育背景 -->
 <div class="section">
-<h2>教育背景</h2>
-<h3 class="job-title">清华大学 – 信息管理与信息系统</h3>
-<p class="date">2013.09 – 2017.06</p>
+<h2 contenteditable="true">教育背景</h2>
+<h3 class="job-title" contenteditable="true">清华大学 – 信息管理与信息系统</h3>
+<p class="date" contenteditable="true">(2013.09 – 2017.06)</p>
 <ul>
-<li>主修课程：数据结构、数据库原理、项目管理</li>
-<li>荣誉：校级奖学金</li>
+    <li contenteditable="true">主修课程：数据结构、数据库原理、项目管理</li>
+    <li contenteditable="true">荣誉：校级奖学金</li>
 </ul>
 </div>
 
+<!-- 技能 -->
 <div class="section">
-<h2>技能</h2>
+<h2 contenteditable="true">技能</h2>
 <ul>
-<li>Python, SQL, Excel</li>
-<li>Axure, Sketch, Figma</li>
-<li>Jira, Trello, Git</li>
+    <li contenteditable="true">Python, SQL, Excel</li>
+    <li contenteditable="true">Axure, Sketch, Figma</li>
+    <li contenteditable="true">Jira, Trello, Git</li>
 </ul>
 </div>
 
+<!-- 下载按钮 -->
 <div class="section">
-<h2>项目经历</h2>
-<h3 class="job-title">社交应用优化 – 产品经理</h3>
-<p class="date">2022.03 – 2022.12</p>
-<ul>
-<li>完成用户调研与原型设计</li>
-<li>通过 A/B 测试优化界面交互，功能使用率提升 35%</li>
-</ul>
+<button id="downloadPDF">下载 PDF</button>
+<button id="downloadIMG">下载图片</button>
 </div>
 
-<div class="section">
-<h2>证书 / 奖项</h2>
-<ul>
-<li>PMP 项目管理证书 – PMI – 2021</li>
-<li>百度年度优秀员工 – 2019</li>
-</ul>
-</div>
+<!-- JS: 保存和下载 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+/* ---------- localStorage 保存 ---------- */
+function saveContent(id) {
+    const el = document.getElementById(id);
+    if(el) el.addEventListener('input', () => {
+        localStorage.setItem(id, el.innerText);
+    });
+    if(localStorage.getItem(id)) el.innerText = localStorage.getItem(id);
+}
+['name','title','intro'].forEach(saveContent);
 
-<div class="section">
-<h2>其他</h2>
-<ul>
-<li>语言：中文（母语）、英文（流利）</li>
-<li>兴趣：摄影、马拉松、科技博客</li>
-</ul>
-</div>
-</div>
+// 保存工作经历列表项
+document.querySelectorAll('ul li[contenteditable="true"]').forEach((li,i)=>{
+    const key = 'li_' + i;
+    li.addEventListener('input',()=>localStorage.setItem(key,li.innerText));
+    if(localStorage.getItem(key)) li.innerText = localStorage.getItem(key);
+});
+
+// 保存照片
+const photoInput = document.getElementById('photoInput');
+const photo = document.getElementById('photo');
+if(localStorage.getItem('photo')) photo.src = localStorage.getItem('photo');
+photoInput.addEventListener('change',(e)=>{
+    const file = e.target.files[0];
+    if(!file) return;
+    const reader = new FileReader();
+    reader.onload = function(event){
+        photo.src = event.target.result;
+        localStorage.setItem('photo',event.target.result);
+    }
+    reader.readAsDataURL(file);
+});
+
+/* ---------- 下载功能 ---------- */
+const downloadPDF = document.getElementById('downloadPDF');
+const downloadIMG = document.getElementById('downloadIMG');
+
+downloadPDF.addEventListener('click', async ()=>{
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF('p','pt','a4');
+    const canvas = await html2canvas(document.body);
+    const imgData = canvas.toDataURL('image/png');
+    const imgProps = doc.getImageProperties(imgData);
+    const pdfWidth = doc.internal.pageSize.getWidth();
+    const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+    doc.addImage(imgData,'PNG',0,0,pdfWidth,pdfHeight);
+    doc.save('resume.pdf');
+});
+
+downloadIMG.addEventListener('click', async ()=>{
+    const canvas = await html2canvas(document.body);
+    const imgData = canvas.toDataURL('image/png');
+    const a = document.createElement('a');
+    a.href = imgData;
+    a.download = 'resume.png';
+    a.click();
+});
+</script>
 </body>
 </html>
